@@ -13,7 +13,7 @@
 <style>
 :root{
   --bg:#0f172a;
-  --card:#020617;
+  --card:#0b1220; /* lighter than bg for visibility */
   --text:#e5e7eb;
   --muted:#94a3b8;
   --accent:#38bdf8;
@@ -31,21 +31,44 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);trans
 header{position:fixed;width:100%;background:rgba(15,23,42,.9);backdrop-filter:blur(10px);z-index:1000}
 .nav{max-width:1200px;margin:auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
 .nav img{height:44px}
-.nav ul{list-style:none;display:flex;gap:26px;align-items:center}
+.nav ul{list-style:none;display:flex;gap:26px;align-items:center;position:relative;padding-bottom:8px}
+.nav-indicator{
+  position:absolute;
+  bottom:0;
+  left:0;
+  height:3px;
+  width:0;
+  background:linear-gradient(90deg,#38bdf8,#2563eb,#38bdf8);
+  background-size:200% 100%;
+  border-radius:3px;
+  transition:left .45s cubic-bezier(.4,0,.2,1),width .45s cubic-bezier(.4,0,.2,1);
+  animation:indicatorGlow 3s linear infinite;
+}
+@keyframes indicatorGlow{
+  0%{background-position:0% 50%}
+  100%{background-position:200% 50%}
+}
+.nav-indicator{position:absolute;bottom:-6px;left:0;height:3px;width:0;background:linear-gradient(90deg,#38bdf8,#2563eb);border-radius:3px;transition:all .35s cubic-bezier(.4,0,.2,1)}
 .nav a{text-decoration:none;color:var(--text);font-weight:500}
 .toggle{cursor:pointer}
 
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px;background:radial-gradient(circle at top,#1e3a8a,#020617 70%)}
-.hero h1{font-family:'Playfair Display',serif;font-size:3.2rem}
+.hero-logo{height:160px;max-width:90%;margin-bottom:28px}@media(max-width:768px){.hero-logo{height:120px}}.hero h1{font-family:'Playfair Display',serif;font-size:3.2rem}
 .hero p{margin-top:16px;color:var(--muted)}
 .btn{display:inline-block;margin-top:36px;padding:14px 34px;border-radius:40px;background:linear-gradient(135deg,#38bdf8,#2563eb);color:#fff;text-decoration:none;font-weight:600;border:none;cursor:pointer}
 
-section{max-width:1200px;margin:auto;padding:100px 20px}
+section{max-width:1200px;margin:auto;padding:120px 20px;position:relative;z-index:1}
 section h2{font-family:'Playfair Display',serif;font-size:2.3rem;text-align:center;margin-bottom:20px}
 .sub{text-align:center;color:var(--muted);max-width:720px;margin:0 auto 60px}
 
 .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
-.service{background:var(--card);padding:32px;border-radius:20px;border:1px solid #1e293b}
+.service{
+  background:linear-gradient(180deg,#0b1220,#020617);
+  padding:32px;
+  border-radius:20px;
+  border:1px solid rgba(56,189,248,.25);
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
 .service h3{margin-bottom:12px}
 .service p{color:var(--muted);font-size:.95rem}
 
@@ -60,26 +83,40 @@ button.submit-btn{padding:14px;border:none;border-radius:30px;background:linear-
 
 footer{text-align:center;padding:40px 20px;color:var(--muted)}
 .whatsapp{position:fixed;right:22px;bottom:22px;background:#22c55e;color:#fff;padding:14px 20px;border-radius:50px;text-decoration:none;font-weight:600}
+#scroll-indicator{
+  position:fixed;
+  top:0;
+  left:0;
+  height:4px;
+  width:0%;
+  background:linear-gradient(90deg,#38bdf8,#2563eb);
+  z-index:2000;
+  transition:width .15s ease-out;
+}
+
 </style>
 </head>
 <body data-theme="dark">
 
+<!-- Scroll Progress Indicator -->
+<div id="scroll-indicator"></div>
 <header>
   <div class="nav">
     <img src="logo.png" alt="Assure & Books Logo">
-    <ul>
+    <ul id="nav-menu">
       <li><a href="#home">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#calendar">Compliance Calendar</a></li>
       <li><a href="#contact">Contact</a></li>
       <li class="toggle" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></li>
+      <span class="nav-indicator" id="nav-indicator"></span>
     </ul>
   </div>
 </header>
 
 <section class="hero" id="home">
   <div>
-    <img src="logo.png" alt="Assure & Books Logo" style="height:90px;margin-bottom:20px" data-aos="zoom-in">
+    <img src="logo.png" alt="Assure & Books Logo" class="hero-logo" data-aos="zoom-in">
     <h1 data-aos="fade-up">Assure & Books</h1>
     <p data-aos="fade-up" data-aos-delay="120">GST, Income Tax & TDS Filing Consultants</p>
     <a href="#services" class="btn">Explore Services</a>
@@ -87,12 +124,45 @@ footer{text-align:center;padding:40px 20px;color:var(--muted)}
 </section>
 
 <section id="services">
-  <h2 data-aos="fade-up">Our Services</h2>
-  <p class="sub">Comprehensive return filing and statutory compliance support under GST and Income Tax laws.</p>
+  <!-- SERVICES SECTION : FORCED VISIBLE VERSION -->
+  <h2>Our Services</h2>
+  <p class="sub">End-to-end return filing, bookkeeping and registration support for businesses and individuals.</p>
+
+  <!-- DEBUG MARKER -->
+  <p style="text-align:center;color:#38bdf8;font-weight:600">(Services list loaded)</p>
+
   <div class="services">
-    <div class="service" data-aos="fade-up"><h3>GST Return Filing</h3><p>GSTR-1, GSTR-3B and annual returns with reconciliation support.</p></div>
-    <div class="service" data-aos="fade-up" data-aos-delay="100"><h3>Income Tax Returns</h3><p>ITR filing for salaried individuals, professionals and businesses.</p></div>
-    <div class="service" data-aos="fade-up" data-aos-delay="200"><h3>TDS Compliance</h3><p>Quarterly TDS returns, challans and Form 16 / 16A.</p></div>
+
+    <div class="service">
+      <h3>GST Return Filing</h3>
+      <p>GSTR-1, GSTR-3B and annual GST returns with reconciliation and timely compliance.</p>
+    </div>
+
+    <div class="service">
+      <h3>Income Tax Returns</h3>
+      <p>ITR filing for salaried individuals, professionals, freelancers and small businesses.</p>
+    </div>
+
+    <div class="service">
+      <h3>TDS Returns</h3>
+      <p>Quarterly TDS return filing, challan preparation and Form 16 / 16A assistance.</p>
+    </div>
+
+    <div class="service">
+      <h3>Bookkeeping & Accounting</h3>
+      <p>Regular bookkeeping, accounts maintenance and basic MIS support for small businesses.</p>
+    </div>
+
+    <div class="service">
+      <h3>Udyam Registration</h3>
+      <p>MSME (Udyam) registration and update services for eligible businesses.</p>
+    </div>
+
+    <div class="service">
+      <h3>Other Registrations & Support</h3>
+      <p>E-Way Bill registration, IEC (Import Export Code), PAN / TAN assistance and other basic registrations.</p>
+    </div>
+
   </div>
 </section>
 
@@ -149,6 +219,38 @@ function showMonth(id){
 
 // default visible calendar
 showMonth('dec');
+// INIT NAV PROGRESS INDICATOR
+const navLinks = document.querySelectorAll('#nav-menu a');
+const indicator = document.getElementById('nav-indicator');
+
+function moveIndicator(el){
+  const menu = document.getElementById('nav-menu');
+  const menuRect = menu.getBoundingClientRect();
+  const links = Array.from(document.querySelectorAll('#nav-menu a'));
+
+  const index = links.indexOf(el);
+  const total = links.length - 1;
+
+  // calculate progress from first to last menu item
+  const progress = index / total;
+
+  const fullWidth = menuRect.width;
+  indicator.style.left = '0px';
+  indicator.style.width = (fullWidth * progress) + 'px';
+}
+
+window.addEventListener('load', () => moveIndicator(navLinks[0]));
+
+window.addEventListener('scroll', () => {
+  const scrollPos = window.scrollY + 140;
+  const sections = ['home','services','calendar','contact'];
+  sections.forEach((id, i) => {
+    const sec = document.getElementById(id);
+    if(sec && sec.offsetTop <= scrollPos && sec.offsetTop + sec.offsetHeight > scrollPos){
+      moveIndicator(navLinks[i]);
+    }
+  });
+});
 </script>
 </body>
 </html>
