@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assure & Books | GST & Income Tax Filing Consultants</title>
+<meta name="description" content="Assure & Books provides GST, Income Tax and TDS return filing services with timely and accurate compliance support.">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0f172a;
+  --card:#020617;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --accent:#38bdf8;
+}
+[data-theme='light']{
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#6b7280;
+  --accent:#2563eb;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);transition:.3s}
+
+header{position:fixed;width:100%;background:rgba(15,23,42,.9);backdrop-filter:blur(10px);z-index:1000}
+.nav{max-width:1200px;margin:auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+.nav img{height:44px}
+.nav ul{list-style:none;display:flex;gap:26px;align-items:center}
+.nav a{text-decoration:none;color:var(--text);font-weight:500}
+.toggle{cursor:pointer}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px;background:radial-gradient(circle at top,#1e3a8a,#020617 70%)}
+.hero h1{font-family:'Playfair Display',serif;font-size:3.2rem}
+.hero p{margin-top:16px;color:var(--muted)}
+.btn{display:inline-block;margin-top:36px;padding:14px 34px;border-radius:40px;background:linear-gradient(135deg,#38bdf8,#2563eb);color:#fff;text-decoration:none;font-weight:600;border:none;cursor:pointer}
+
+section{max-width:1200px;margin:auto;padding:100px 20px}
+section h2{font-family:'Playfair Display',serif;font-size:2.3rem;text-align:center;margin-bottom:20px}
+.sub{text-align:center;color:var(--muted);max-width:720px;margin:0 auto 60px}
+
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
+.service{background:var(--card);padding:32px;border-radius:20px;border:1px solid #1e293b}
+.service h3{margin-bottom:12px}
+.service p{color:var(--muted);font-size:.95rem}
+
+.calendar{max-width:900px;margin:auto}
+.calendar-item{display:flex;justify-content:space-between;gap:20px;padding:16px 20px;border-bottom:1px solid #1e293b}
+.calendar-item span{color:var(--muted)}
+
+.contact{max-width:600px;margin:auto}
+form{display:grid;gap:18px}
+input,textarea{padding:14px;border-radius:10px;border:none;font-family:inherit}
+button.submit-btn{padding:14px;border:none;border-radius:30px;background:linear-gradient(135deg,#38bdf8,#2563eb);color:#fff;font-weight:600;cursor:pointer}
+
+footer{text-align:center;padding:40px 20px;color:var(--muted)}
+.whatsapp{position:fixed;right:22px;bottom:22px;background:#22c55e;color:#fff;padding:14px 20px;border-radius:50px;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body data-theme="dark">
+
+<header>
+  <div class="nav">
+    <img src="logo.png" alt="Assure & Books Logo">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#calendar">Compliance Calendar</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li class="toggle" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div>
+    <img src="logo.png" alt="Assure & Books Logo" style="height:90px;margin-bottom:20px" data-aos="zoom-in">
+    <h1 data-aos="fade-up">Assure & Books</h1>
+    <p data-aos="fade-up" data-aos-delay="120">GST, Income Tax & TDS Filing Consultants</p>
+    <a href="#services" class="btn">Explore Services</a>
+  </div>
+</section>
+
+<section id="services">
+  <h2 data-aos="fade-up">Our Services</h2>
+  <p class="sub">Comprehensive return filing and statutory compliance support under GST and Income Tax laws.</p>
+  <div class="services">
+    <div class="service" data-aos="fade-up"><h3>GST Return Filing</h3><p>GSTR-1, GSTR-3B and annual returns with reconciliation support.</p></div>
+    <div class="service" data-aos="fade-up" data-aos-delay="100"><h3>Income Tax Returns</h3><p>ITR filing for salaried individuals, professionals and businesses.</p></div>
+    <div class="service" data-aos="fade-up" data-aos-delay="200"><h3>TDS Compliance</h3><p>Quarterly TDS returns, challans and Form 16 / 16A.</p></div>
+  </div>
+</section>
+
+<section id="calendar">
+  <h2 data-aos="fade-up">Compliance Calendar</h2>
+  <p class="sub">Important statutory due dates (December 2025)</p>
+
+  <div style="text-align:center;margin-bottom:30px">
+    <button class="btn" onclick="showMonth('dec')">December 2025</button>
+  </div>
+
+  <div class="calendar" id="dec">
+    <div class="calendar-item"><strong>7 Dec 2025</strong><span>TDS payment for November</span></div>
+    <div class="calendar-item"><strong>11 Dec 2025</strong><span>GSTR-1 (Monthly)</span></div>
+    <div class="calendar-item"><strong>13 Dec 2025</strong><span>GSTR-1 (QRMP)</span></div>
+    <div class="calendar-item"><strong>15 Dec 2025</strong><span>Advance Tax – 3rd Installment</span></div>
+    <div class="calendar-item"><strong>20 Dec 2025</strong><span>GSTR-3B</span></div>
+    <div class="calendar-item"><strong>30 Dec 2025</strong><span>TDS Challan-cum-statement</span></div>
+    <div class="calendar-item"><strong>31 Dec 2025</strong><span>Belated / Revised ITR</span></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 data-aos="fade-up">Contact & Enquiries</h2>
+  <p class="sub">Reach out for filing support, compliance assistance or general queries.</p>
+  <div class="contact">
+    <form action="https://formsubmit.co/bhuvanasathya21@gmail.com" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Requirement" rows="5" required></textarea>
+      <button type="submit" class="submit-btn">Send Enquiry</button>
+    </form>
+  </div>
+</section>
+
+<footer>© 2025 Assure & Books Tax Consulting Services</footer>
+<a class="whatsapp" href="https://wa.me/919962432391?text=Hello%20I%20need%20assistance%20with%20GST%20or%20Income%20Tax%20filing" target="_blank">WhatsApp</a>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({once:true,duration:900,easing:'ease-out-cubic'});
+
+function toggleTheme(){
+  document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+}
+
+// Fix: define showMonth to avoid ReferenceError
+function showMonth(id){
+  const calendars = document.querySelectorAll('.calendar');
+  calendars.forEach(c => c.style.display = 'none');
+  const active = document.getElementById(id);
+  if(active){ active.style.display = 'block'; }
+}
+
+// default visible calendar
+showMonth('dec');
+</script>
+</body>
+</html>
