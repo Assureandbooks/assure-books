@@ -168,7 +168,7 @@ footer{text-align:center;padding:40px 20px;color:var(--muted)}
 
 <!-- TAGLINE STRIP -->
 <section id="tagline" style="padding:80px 20px;background:linear-gradient(135deg,#020617,#0b1220)">
-  <h2 style="text-align:center;font-family:'Playfair Display',serif;font-size:2.6rem;color:#e5e7eb" data-aos="fade-up">Affordable Fees, Assured Expertise</h2>
+  <h2 style="text-align:center;font-family:'Playfair Display',serif;font-size:2.6rem;color:#e5e7eb" data-aos="fade-up">Affordable Fees, Assured Compliance</h2>
   <p style="text-align:center;color:#94a3b8;max-width:700px;margin:18px auto 0" data-aos="fade-up" data-aos-delay="120">
     Transparent pricing, timely filings, and dependable compliance support you can trust.
   </p>
@@ -176,14 +176,20 @@ footer{text-align:center;padding:40px 20px;color:var(--muted)}
 
 <section id="calendar">
   <h2 data-aos="fade-up">Compliance Calendar</h2>
-  <p class="sub">Important statutory due dates (December 2025)</p>
+  <p class="sub">Important statutory due dates (January 2026)</p>
 
   <div style="text-align:center;margin-bottom:30px">
-    <button class="btn" onclick="showMonth('dec')">December 2025</button>
+    <button class="btn" onclick="showMonth('jan')">January 2026</button>
   </div>
 
-  <div class="calendar" id="dec">
-    <div class="calendar-item"><strong>7 Dec 2025</strong><span>TDS payment for November</span></div>
+  <div class="calendar" id="jan">
+  <div class="calendar-item"><strong>7 Jan 2026</strong><span>TDS payment for December 2025</span></div>
+  <div class="calendar-item"><strong>11 Jan 2026</strong><span>GSTR-1 (Monthly filers)</span></div>
+  <div class="calendar-item"><strong>13 Jan 2026</strong><span>GSTR-1 (QRMP scheme)</span></div>
+  <div class="calendar-item"><strong>15 Jan 2026</strong><span>Advance Tax – 4th Installment (Income Tax)</span></div>
+  <div class="calendar-item"><strong>20 Jan 2026</strong><span>GSTR-3B (GST Return)</span></div>
+  <div class="calendar-item"><strong>30 Jan 2026</strong><span>TDS Challan-cum-statement (Forms 26Q / 24Q)</span></div>
+</div>
     <div class="calendar-item"><strong>11 Dec 2025</strong><span>GSTR-1 (Monthly)</span></div>
     <div class="calendar-item"><strong>13 Dec 2025</strong><span>GSTR-1 (QRMP)</span></div>
     <div class="calendar-item"><strong>15 Dec 2025</strong><span>Advance Tax – 3rd Installment</span></div>
@@ -226,7 +232,7 @@ function showMonth(id){
 }
 
 // default visible calendar
-showMonth('dec');
+showMonth('jan');
 // INIT NAV PROGRESS INDICATOR
 const navLinks = document.querySelectorAll('#nav-menu a');
 const indicator = document.getElementById('nav-indicator');
@@ -262,4 +268,3 @@ window.addEventListener('scroll', () => {
 </script>
 </body>
 </html>
-
