@@ -94,6 +94,27 @@ footer{text-align:center;padding:40px 20px;color:var(--muted)}
   transition:width .15s ease-out;
 }
 
+/* Month dropdown styling */
+/* Month dropdown – blended with site theme */
+.month-select{
+  padding:14px 26px;
+  border-radius:40px;
+  font-weight:600;
+  background:linear-gradient(135deg, rgba(56,189,248,0.15), rgba(37,99,235,0.15));
+  color:var(--text);
+  border:1px solid rgba(56,189,248,.35);
+  backdrop-filter: blur(6px);
+  cursor:pointer;
+  transition:all .3s ease;
+}
+.month-select:hover{
+  background:linear-gradient(135deg, rgba(56,189,248,0.25), rgba(37,99,235,0.25));
+}
+.month-select option{
+  color:#0f172a;
+}
+.month-select option{color:#0f172a}
+
 </style>
 </head>
 <body data-theme="dark">
@@ -176,21 +197,27 @@ footer{text-align:center;padding:40px 20px;color:var(--muted)}
 
 <section id="calendar">
   <h2 data-aos="fade-up">Compliance Calendar</h2>
-  <p class="sub">Important statutory due dates (January 2026)</p>
+  <p class="sub">Important statutory due dates – 2026</p>
 
   <div style="text-align:center;margin-bottom:30px">
-    <button class="btn" onclick="showMonth('jan')">January 2026</button>
+    <select id="monthSelect" onchange="renderCalendar()" class="month-select">
+      <option value="jan">January 2026</option>
+      <option value="feb">February 2026</option>
+      <option value="mar">March 2026</option>
+      <option value="apr">April 2026</option>
+      <option value="may">May 2026</option>
+      <option value="jun">June 2026</option>
+      <option value="jul">July 2026</option>
+      <option value="aug">August 2026</option>
+      <option value="sep">September 2026</option>
+      <option value="oct">October 2026</option>
+      <option value="nov">November 2026</option>
+      <option value="dec">December 2026</option>
+    </select>
   </div>
 
-  <div class="calendar" id="jan">
-  <div class="calendar-item"><strong>7 Jan 2026</strong><span>TDS payment for December 2025</span></div>
-  <div class="calendar-item"><strong>11 Jan 2026</strong><span>GSTR-1 (Monthly filers)</span></div>
-  <div class="calendar-item"><strong>13 Jan 2026</strong><span>GSTR-1 (QRMP scheme)</span></div>
-  <div class="calendar-item"><strong>15 Jan 2026</strong><span>Advance Tax – 4th Installment (Income Tax)</span></div>
-  <div class="calendar-item"><strong>20 Jan 2026</strong><span>GSTR-3B (GST Return)</span></div>
-  <div class="calendar-item"><strong>30 Jan 2026</strong><span>TDS Challan-cum-statement (Forms 26Q / 24Q)</span></div>
-</div>
-    </section>
+  <div class="calendar" id="calendarList"></div>
+</section>
 
 <section id="contact">
   <h2 data-aos="fade-up">Contact & Enquiries</h2>
@@ -216,16 +243,93 @@ function toggleTheme(){
   document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
 }
 
-// Fix: define showMonth to avoid ReferenceError
-function showMonth(id){
-  const calendars = document.querySelectorAll('.calendar');
-  calendars.forEach(c => c.style.display = 'none');
-  const active = document.getElementById(id);
-  if(active){ active.style.display = 'block'; }
+// Compliance calendar data for 2026
+const calendarData = {
+  jan: [
+    ['7 Jan 2026','TDS payment for December 2025'],
+    ['11 Jan 2026','GSTR-1 (Monthly filers)'],
+    ['13 Jan 2026','GSTR-1 (QRMP scheme)'],
+    ['15 Jan 2026','Advance Tax – 4th / Final Installment'],
+    ['20 Jan 2026','GSTR-3B'],
+    ['30 Jan 2026','TDS Challan-cum-statement']
+  ],
+  feb: [
+    ['7 Feb 2026','TDS payment for January'],
+    ['11 Feb 2026','GSTR-1 (Monthly filers)'],
+    ['14 Feb 2026','Statement of Financial Transaction (SFT) – If applicable'],
+    ['20 Feb 2026','GSTR-3B']
+  ],
+  mar: [
+    ['7 Mar 2026','TDS payment for February'],
+    ['11 Mar 2026','GSTR-1 (Monthly filers)'],
+    ['15 Mar 2026','Advance Tax – Final Installment'],
+    ['31 Mar 2026','Year-end tax planning & statutory adjustments'],
+    ['20 Mar 2026','GSTR-3B']
+  ],
+  apr: [
+    ['7 Apr 2026','TDS payment for March'],
+    ['11 Apr 2026','GSTR-1 (Monthly filers)'],
+    ['20 Apr 2026','GSTR-3B']
+  ],
+  may: [
+    ['7 May 2026','TDS payment for April'],
+    ['11 May 2026','GSTR-1 (Monthly filers)'],
+    ['20 May 2026','GSTR-3B']
+  ],
+  jun: [
+    ['7 Jun 2026','TDS payment for May'],
+    ['11 Jun 2026','GSTR-1 (Monthly filers)'],
+    ['15 Jun 2026','Advance Tax – 1st Installment'],
+    ['20 Jun 2026','GSTR-3B']
+  ],
+  jul: [
+    ['7 Jul 2026','TDS payment for June'],
+    ['11 Jul 2026','GSTR-1 (Monthly filers)'],
+    ['20 Jul 2026','GSTR-3B']
+  ],
+  aug: [
+    ['7 Aug 2026','TDS payment for July'],
+    ['11 Aug 2026','GSTR-1 (Monthly filers)'],
+    ['20 Aug 2026','GSTR-3B']
+  ],
+  sep: [
+    ['7 Sep 2026','TDS payment for August'],
+    ['11 Sep 2026','GSTR-1 (Monthly filers)'],
+    ['15 Sep 2026','Advance Tax – 2nd Installment'],
+    ['20 Sep 2026','GSTR-3B']
+  ],
+  oct: [
+    ['7 Oct 2026','TDS payment for September'],
+    ['11 Oct 2026','GSTR-1 (Monthly filers)'],
+    ['20 Oct 2026','GSTR-3B']
+  ],
+  nov: [
+    ['7 Nov 2026','TDS payment for October'],
+    ['11 Nov 2026','GSTR-1 (Monthly filers)'],
+    ['20 Nov 2026','GSTR-3B']
+  ],
+  dec: [
+    ['7 Dec 2026','TDS payment for November'],
+    ['11 Dec 2026','GSTR-1 (Monthly filers)'],
+    ['15 Dec 2026','Advance Tax – 3rd Installment'],
+    ['20 Dec 2026','GSTR-3B'],
+    ['30 Dec 2026','TDS Challan-cum-statement']
+  ]
+};
+
+function renderCalendar(){
+  const month = document.getElementById('monthSelect').value;
+  const list = document.getElementById('calendarList');
+  list.innerHTML = '';
+  calendarData[month].forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'calendar-item';
+    div.innerHTML = `<strong>${item[0]}</strong><span>${item[1]}</span>`;
+    list.appendChild(div);
+  });
 }
 
-// default visible calendar
-showMonth('jan');
+renderCalendar();
 // INIT NAV PROGRESS INDICATOR
 const navLinks = document.querySelectorAll('#nav-menu a');
 const indicator = document.getElementById('nav-indicator');
